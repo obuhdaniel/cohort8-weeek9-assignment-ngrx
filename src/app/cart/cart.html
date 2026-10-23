@@ -1,0 +1,22 @@
+<h2>Cart Component</h2>
+
+@if (cartData$ | async; as cartProducts) {
+  @if (cartProducts.length === 0) {
+    <p class="empty-cart">Your cart is empty.</p>
+  } @else {
+    <div class="cart-wrapper">
+      @for (product of cartProducts; track product) {
+        <div class="cart-product">
+          <img [src]="product.productImagePath" [alt]="product.productName" />
+          <div class="product-details">
+            <span>ProductName: {{ product.productName }}</span>
+            <span>Price: {{ product.productPrice }}</span>
+            <span>Category: {{ product.category }}</span>
+            <span>quantity: {{ product.quantity }}</span>
+          </div>
+          <button (click)="removeProductFromCart(product.id)">Remove from cart</button>
+        </div>
+      }
+    </div>
+  }
+}
